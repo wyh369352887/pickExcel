@@ -30,16 +30,6 @@
         <option value="json" selected> JSON</option>
     </select>
     <div id="drop">拖动excel文件到此位置</div>
-    <div class="duoyu" style="display:none">
-        Advanced Demo Options:
-        <br /> Use Web Workers: (when available)
-        <input type="checkbox" name="useworker" checked>
-        <br /> Use Transferrables: (when available)
-        <input type="checkbox" name="xferable" checked>
-        <br /> Use readAsBinaryString: (when available)
-        <input type="checkbox" name="userabs" checked>
-        <br />
-    </div>
     <div id="out"></div>
     <br />
     <script src="shim.js"></script>
@@ -193,12 +183,30 @@
         // if(typeof console !== 'undefined') console.log("output", new Date());
         var excelPage = '数据库0301',
             columnName = '客户需提供的基本手续,社保记录,贷款期限,信用记录',
-            lineSection = '99-188',
-            lineStart = 2;//excel数据实际从第几行开始
+            lineSection = '5-100',
+            lineStart = 2,//excel数据实际从第几行开始
+            lineData = {
+            	name:'信用记录',
+            	data:'无'
+            };
         // getHoleColumn(excelPage,columnName,output);
-        getSeriesLine(excelPage, lineSection, output,lineStart);
+        // getSeriesLine(excelPage, lineSection, output,lineStart);
+        getLineByData(excelPage,lineData,output);
     }
-
+    function getLineByData(excelPage,lineData,output){
+    	var resData = {};
+    	var len = output[excelPage].length;
+    	for(var i = 0,n = 0; i < len; i++){
+    		if(output[excelPage][i][lineData.name] == lineData.data){
+    			resData[n] = output[excelPage][i];
+    			n++;
+    		}
+    	}
+        resData = JSON.stringify(resData, 2, 2);
+    	if (out.innerHTML === undefined) out.textContent = resData;
+        else out.innerHTML = `<textarea>${resData}</textarea>`;
+        if (typeof console !== 'undefined') console.log("output", new Date());
+    }
     function getHoleColumn(excelPage, columnName, output) {
         var cnArr = columnName.split(',');
         var resColumn = {};
@@ -218,7 +226,6 @@
         else out.innerHTML = `<textarea>${resColumn}</textarea>`;
         if (typeof console !== 'undefined') console.log("output", new Date());
     }
-
     function getSeriesLine(excelPage, lineSection, output,lineStart) {
     	console.log(output);
         var lsArr = lineSection.split('-');

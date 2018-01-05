@@ -2,7 +2,7 @@
  * @Author: elephant.H
  * @Date:   2018-01-03 17:20:03
  * @Last Modified by:   elephant.H
- * @Last Modified time: 2018-01-04 17:53:59
+ * @Last Modified time: 2018-01-05 18:08:16
  */
 var X = XLSX;
 var XW = {
@@ -139,7 +139,7 @@ function process_wb(wb) {
             //json格式的数据
             // console.log(output);
             //这边是最终输出
-            break;
+        break;
 
     }
 
@@ -150,13 +150,33 @@ function process_wb(wb) {
     if (excelPage != '') {
         switch (target) {
             case 'getHoleExcelColumn':
-            	var inputs = document.getElementById('innerOption').getElementsByTagName('input'),
-            		columnName = [];
-            	for(var i = 0; i < inputs.length; i++){
-            		columnName.push(inputs[i].value);
-            	}
+                var inputs = document.getElementById('innerOption').getElementsByTagName('input'),
+                    columnName = [];
+                for (var i = 0; i < inputs.length; i++) {
+                    columnName.push(inputs[i].value);
+                }
                 getHoleColumn(excelPage, columnName, output);
+                break;
+            case 'getHoleExcelLine':
+                var lineStart = document.getElementById('excelStartLine').value,
+                    startNum = document.getElementById('lineStartNum').value,
+                    endNum = document.getElementById('lineEndNum').value,
+                    lineSection = startNum + "-" + endNum;
+                getSeriesLine(excelPage, lineSection, output, lineStart);
             break;
+            case 'getLineByData':
+            	var inputs = document.getElementById('innerOption').getElementsByTagName('input'),
+            		lineData = [];
+            	for (var i = 0,n = 0; i < inputs.length; i+=2){
+            		lineData[n] = {};
+            		lineData[n].name = inputs[i].value;
+            		n++;
+            	}
+            	for (var k = 1,n = 0; k < inputs.length; k+=2){
+            		lineData[n].data = inputs[k].value;
+            		n++;
+            	}
+            	getLineByData(excelPage, lineData, output);
         }
     } else {
         alert('请先配置选项!');
@@ -164,23 +184,42 @@ function process_wb(wb) {
     //     columnName = '客户需提供的基本手续,社保记录,贷款期限,信用记录',
     //     lineSection = '5-100',
     //     lineStart = 2,//excel数据实际从第几行开始
-    //     lineData = {
-    //     	name:'仓储面积',
-    //     	data:'2000'
-    //     };
+    // var lineData = [{
+    //         name: '运营状况',
+    //         data: '良好'
+    //     },
+    //     {
+    //         name: '地区',
+    //         data: '冀北'
+    //     }
+    // ];
     // getHoleColumn(excelPage,columnName,output);
     // getSeriesLine(excelPage, lineSection, output,lineStart);
-    // getLineByData(excelPage,lineData,output);
+    // getLineByData(excelPage, lineData, output);
 
 }
 
 function getLineByData(excelPage, lineData, output) {
+	console.log(output);
     var resData = {};
-    var len = output[excelPage].length;
+    var len = output[excelPage].length,
+        dataLen = lineData.length,
+        finalData = {},
+        same = '';
     for (var i = 0, n = 0; i < len; i++) {
-        if (output[excelPage][i][lineData.name] == lineData.data) {
-            resData[n] = output[excelPage][i];
+        for (var j = 0; j < dataLen; j++) {
+            if (output[excelPage][i][lineData[j].name] === lineData[j].data) {
+                same += '+';
+            }else{
+            	same += '-';
+            }
+        }
+        if(same.indexOf('-') === -1){
+        	resData[n] = output[excelPage][i];
             n++;
+            same = '';
+        }else{
+        	same = '';
         }
     }
     resData = JSON.stringify(resData, 2, 2);
@@ -191,7 +230,6 @@ function getLineByData(excelPage, lineData, output) {
 //抓取符合条件的整列
 function getHoleColumn(excelPage, columnName, output) {
     var cnArr = columnName;
-    console.log(cnArr);
     var resColumn = {};
     for (var i = 0; i < output[excelPage].length; i++) {
         var resObj = {};
@@ -288,10 +326,14 @@ function han() {
             target = 'getHoleExcelColumn';
             break;
         case 'holeLine':
-            console.log(2);
+            optionObj.innerHTML = '<p>您的Excel表格数据是从第几行开始的:</p><p>(以excel内每行最左侧的数字为准)</p><input type="text" id="excelStartLine"><p>请输入抓取行数的区间:</p><input type="text" id="lineStartNum" placeholder="起始行数"><input type="text" id="lineEndNum" placeholder="结束行数"><div id="innerOption"></div>';
+            target = 'getHoleExcelLine';
             break;
         case 'dataLine':
-            console.log(3);
+        	optionObj.innerHTML = '<p>需要满足几个条件:</p><input type="text" id="dataNum"><div id="innerOption"></div>';
+        	var dataNum = document.getElementById('dataNum');
+        	dataNum.addEventListener('input',forDataLineInput,false);
+        	target = 'getLineByData';
             break;
         default:
             alert('error');
@@ -301,10 +343,19 @@ function han() {
 
 function forHoleColumnInput() {
     var num = document.getElementById('columnNum').value,
-    	text = '<input type="text" class="column-name" placeholder="列的名称">',
-    	res = '';
-    for(var i = 0; i < num; i++){
-    	res += text;
+        text = '<input type="text" class="column-name" placeholder="列的名称">',
+        res = '';
+    for (var i = 0; i < num; i++) {
+        res += text;
     }
     document.getElementById('innerOption').innerHTML = res;
+}
+function forDataLineInput(){
+	var num = document.getElementById('dataNum').value,
+		res = '';
+	for(var i = 0; i < num; i++){
+		var text = `<div class="line"></div><div style="float:left;margin-bottom:10px;"><p>需要满足条件的列的名称${i+1}:</p><input type="text" class="data-name"><p>需要满足条件的值${i+1}:</p><input type="text" class="data-msg"></div>`;
+		res += text;
+	}
+	document.getElementById('innerOption').innerHTML = res;
 }

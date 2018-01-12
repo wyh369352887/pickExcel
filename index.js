@@ -2,7 +2,7 @@
  * @Author: elephant.H
  * @Date:   2018-01-03 17:20:03
  * @Last Modified by:   elephant.H
- * @Last Modified time: 2018-01-05 18:08:16
+ * @Last Modified time: 2018-01-12 17:40:09
  */
 var X = XLSX;
 var XW = {
@@ -139,7 +139,7 @@ function process_wb(wb) {
             //json格式的数据
             // console.log(output);
             //这边是最终输出
-        break;
+            break;
 
     }
 
@@ -163,20 +163,20 @@ function process_wb(wb) {
                     endNum = document.getElementById('lineEndNum').value,
                     lineSection = startNum + "-" + endNum;
                 getSeriesLine(excelPage, lineSection, output, lineStart);
-            break;
+                break;
             case 'getLineByData':
-            	var inputs = document.getElementById('innerOption').getElementsByTagName('input'),
-            		lineData = [];
-            	for (var i = 0,n = 0; i < inputs.length; i+=2){
-            		lineData[n] = {};
-            		lineData[n].name = inputs[i].value;
-            		n++;
-            	}
-            	for (var k = 1,n = 0; k < inputs.length; k+=2){
-            		lineData[n].data = inputs[k].value;
-            		n++;
-            	}
-            	getLineByData(excelPage, lineData, output);
+                var inputs = document.getElementById('innerOption').getElementsByTagName('input'),
+                    lineData = [];
+                for (var i = 0, n = 0; i < inputs.length; i += 2) {
+                    lineData[n] = {};
+                    lineData[n].name = inputs[i].value;
+                    n++;
+                }
+                for (var k = 1, n = 0; k < inputs.length; k += 2) {
+                    lineData[n].data = inputs[k].value;
+                    n++;
+                }
+                getLineByData(excelPage, lineData, output);
         }
     } else {
         alert('请先配置选项!');
@@ -199,8 +199,16 @@ function process_wb(wb) {
 
 }
 
+function copyClick() {
+    $('#text').on('click', function() {
+        $(this).select();
+        document.execCommand("Copy"); 
+        $('p.title').html('输出:<span style="color:green;">已全选并复制到粘贴板!</span>');
+    })
+}
+
 function getLineByData(excelPage, lineData, output) {
-	console.log(output);
+    console.log(output);
     var resData = {};
     var len = output[excelPage].length,
         dataLen = lineData.length,
@@ -210,22 +218,23 @@ function getLineByData(excelPage, lineData, output) {
         for (var j = 0; j < dataLen; j++) {
             if (output[excelPage][i][lineData[j].name] === lineData[j].data) {
                 same += '+';
-            }else{
-            	same += '-';
+            } else {
+                same += '-';
             }
         }
-        if(same.indexOf('-') === -1){
-        	resData[n] = output[excelPage][i];
+        if (same.indexOf('-') === -1) {
+            resData[n] = output[excelPage][i];
             n++;
             same = '';
-        }else{
-        	same = '';
+        } else {
+            same = '';
         }
     }
     resData = JSON.stringify(resData, 2, 2);
     if (out.innerHTML === undefined) out.textContent = resData;
-    else out.innerHTML = `<textarea>${resData}</textarea>`;
+    else out.innerHTML = `<textarea id="text">${resData}</textarea>`;
     if (typeof console !== 'undefined') console.log("output", new Date());
+    copyClick();
 }
 //抓取符合条件的整列
 function getHoleColumn(excelPage, columnName, output) {
@@ -244,8 +253,9 @@ function getHoleColumn(excelPage, columnName, output) {
     }
     resColumn = JSON.stringify(resColumn, 2, 2);
     if (out.innerHTML === undefined) out.textContent = resColumn;
-    else out.innerHTML = `<textarea>${resColumn}</textarea>`;
+    else out.innerHTML = `<textarea id="text">${resColumn}</textarea>`;
     if (typeof console !== 'undefined') console.log("output", new Date());
+    copyClick();
 }
 //抓取整列数据
 function getSeriesLine(excelPage, lineSection, output, lineStart) {
@@ -259,8 +269,9 @@ function getSeriesLine(excelPage, lineSection, output, lineStart) {
     }
     resLine = JSON.stringify(resLine, 2, 2);
     if (out.innerHTML === undefined) out.textContent = resLine;
-    else out.innerHTML = `<textarea>${resLine}</textarea>`;
+    else out.innerHTML = `<textarea id="text">${resLine}</textarea>`;
     if (typeof console !== 'undefined') console.log("output", new Date());
+    copyClick();
 }
 //抓取整行数据
 var drop = document.getElementById('drop');
@@ -330,10 +341,10 @@ function han() {
             target = 'getHoleExcelLine';
             break;
         case 'dataLine':
-        	optionObj.innerHTML = '<p>需要满足几个条件:</p><input type="text" id="dataNum"><div id="innerOption"></div>';
-        	var dataNum = document.getElementById('dataNum');
-        	dataNum.addEventListener('input',forDataLineInput,false);
-        	target = 'getLineByData';
+            optionObj.innerHTML = '<p>需要满足几个条件:</p><input type="text" id="dataNum"><div id="innerOption"></div>';
+            var dataNum = document.getElementById('dataNum');
+            dataNum.addEventListener('input', forDataLineInput, false);
+            target = 'getLineByData';
             break;
         default:
             alert('error');
@@ -350,12 +361,13 @@ function forHoleColumnInput() {
     }
     document.getElementById('innerOption').innerHTML = res;
 }
-function forDataLineInput(){
-	var num = document.getElementById('dataNum').value,
-		res = '';
-	for(var i = 0; i < num; i++){
-		var text = `<div class="line"></div><div style="float:left;margin-bottom:10px;"><p>需要满足条件的列的名称${i+1}:</p><input type="text" class="data-name"><p>需要满足条件的值${i+1}:</p><input type="text" class="data-msg"></div>`;
-		res += text;
-	}
-	document.getElementById('innerOption').innerHTML = res;
+
+function forDataLineInput() {
+    var num = document.getElementById('dataNum').value,
+        res = '';
+    for (var i = 0; i < num; i++) {
+        var text = `<div class="line"></div><div style="float:left;margin-bottom:10px;"><p>需要满足条件的列的名称${i+1}:</p><input type="text" class="data-name"><p>需要满足条件的值${i+1}:</p><input type="text" class="data-msg"></div>`;
+        res += text;
+    }
+    document.getElementById('innerOption').innerHTML = res;
 }

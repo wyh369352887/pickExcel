@@ -24,7 +24,7 @@ pickExcel
 
 使用配置
 -------
-所有涉及到数字的地方请填写<span color="#DC143C">阿拉伯数字!</span><br>
+所有涉及到数字的地方请填写<span style="text-decoration: underline;">阿拉伯数字!</span><br>
 所有涉及到数字的地方请填写阿拉伯数字!<br>
 所有涉及到数字的地方请填写阿拉伯数字!<br>
 

@@ -31,7 +31,7 @@ _sheet1,sheet2,sheet3..._
 #### 抓取整列数据
 选择"<font color=#48B545>导出整列</font>"选项<br>
 填写需要导出的列数以及每一列的名称,例如:<br><br>
-![demo](https://github.com/wyh369352887/pickExcel/raw/master/image/2.jpg)
+!["demo"](https://github.com/wyh369352887/pickExcel/raw/master/image/2.jpg)
 <br><br>
 将xlxs文件拖进虚线框内<br><br>
 ![虚线框](https://github.com/wyh369352887/pickExcel/raw/master/image/1.jpg)

@@ -2,7 +2,7 @@
  * @Author: elephant.H
  * @Date:   2018-01-03 17:20:03
  * @Last Modified by:   elephant.H
- * @Last Modified time: 2018-01-12 17:40:09
+ * @Last Modified time: 2018-02-05 13:42:56
  */
 var X = XLSX;
 var XW = {
@@ -177,6 +177,10 @@ function process_wb(wb) {
                     n++;
                 }
                 getLineByData(excelPage, lineData, output);
+                break;
+            default:
+                alert('请先配置选项!');
+                break;
         }
     } else {
         alert('请先配置选项!');
@@ -316,18 +320,9 @@ if (drop.addEventListener) {
     drop.addEventListener('dragover', handleDragover, false);
     drop.addEventListener('drop', handleDrop, false);
 }
-var target = '',
-    holeColumn = document.getElementById('holeColumn'),
-    holeLine = document.getElementById('holeLine'),
-    dataLine = document.getElementById('dataLine');
-if (holeColumn.addEventListener && holeLine.addEventListener && dataLine.addEventListener) {
-    holeColumn.addEventListener('click', han, false);
-    holeLine.addEventListener('click', han, false);
-    dataLine.addEventListener('click', han, false);
-}
-
+document.getElementById('select').addEventListener('change',han,false);
 function han() {
-    var id = this.id,
+    var id = $(this).find("option:selected").attr('id'),
         optionObj = document.getElementById('option');
     switch (id) {
         case 'holeColumn':
@@ -347,7 +342,8 @@ function han() {
             target = 'getLineByData';
             break;
         default:
-            alert('error');
+            optionObj.innerHTML = '';
+            console.log('reset option , please config your export option!');
             break;
     }
 }

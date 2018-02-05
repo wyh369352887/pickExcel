@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<!-- xlsx.js (C) 2013-2015 SheetJS http://sheetjs.com -->
-<!-- vim: set ts=2: -->
 <html>
 
 <head>
@@ -18,19 +16,25 @@
     <div class="left">
         <div id="drop">拖动excel文件到此位置</div>
         <ul id="button">
-        	<li>
-        		<p>需要提取第几页的Excel数据?(Sheet1?Sheet2?or...?)</p>
-        		<input type="text" id="excelPageNum" value="Sheet1">
-        	</li>
             <li>
-                <input type="radio" name="option" id="holeColumn">导出整列</li>
+                <p>需要提取第几页的Excel数据?(Sheet1?Sheet2?or...?)</p>
+                <input type="text" id="excelPageNum" value="Sheet1">
+            </li>
             <li>
-                <input type="radio" name="option" id="holeLine">导出整行</li>
-            <li>
-                <input type="radio" name="option" id="dataLine">导出符合条件的整行</li>
+                <!-- <input type="radio" name="option" id="holeColumn">导出整列 -->
+                <select id="select">
+                    <option>导出选项</option>
+                    <option id="holeColumn">导出整列</option>
+                    <option id="holeLine">导出整行</option>
+                    <option id="dataLine">导出符合条件的整行</option>
+                </select>
+            </li>
+            <!-- <li> -->
+                <!-- <input type="radio" name="option" id="holeLine">导出整行</li> -->
+            <!-- <li> -->
+                <!-- <input type="radio" name="option" id="dataLine">导出符合条件的整行</li> -->
         </ul>
         <div id="option">
-        	
         </div>
     </div>
     <br />

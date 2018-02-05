@@ -16,7 +16,8 @@
 
 使用方法
 ---
-<code>拷贝项目至本地后，在浏览器内打开index.html</code>
+<br>
+ 拷贝项目至本地后，在浏览器内打开index.html
 <br>
 <br>
 使用配置

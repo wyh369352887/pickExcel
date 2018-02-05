@@ -24,10 +24,10 @@ pickExcel
 
 使用配置
 -------
-所有涉及到数字的地方请填写<span style="text-decoration: underline;">阿拉伯数字!</span><br>
 所有涉及到数字的地方请填写阿拉伯数字!<br>
 所有涉及到数字的地方请填写阿拉伯数字!<br>
-
+所有涉及到数字的地方请填写阿拉伯数字!<br>
+<p style="color: red">111</p>
 
 无论使用哪种功能，请先填写需要抓取Excel表格的页码<br>
 默认的命名方式为"sheet1,sheet2,sheet3..."<br>

@@ -34,8 +34,10 @@ pickExcel
 不排除有些表格自定义了命名，所以请提供页码名称,默认为"sheet1"<br>
 <br>
 
-抓取整列数据
+#####抓取整列数据
+
 ---
+
 选择"导出整列"选项<br>
 填写需要导出的列数以及每一列的名称,例如:<br><br>
 !["demo"](https://github.com/wyh369352887/pickExcel/raw/master/image/2.jpg)

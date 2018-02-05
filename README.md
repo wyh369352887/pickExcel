@@ -1,4 +1,5 @@
-# pickExcel
+pickExcel
+===
 
 
 基于某老哥([excel](https://github.com/wwhgtt/excel))已有成果改进的浏览器内javascript提取excel数据的工具，excel→json
@@ -20,6 +21,7 @@
  拷贝项目至本地后，在浏览器内打开index.html
 <br>
 <br>
+
 使用配置
 ---
 所有涉及到数字的地方请填写阿拉伯数字!<br>

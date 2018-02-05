@@ -38,6 +38,8 @@ pickExcel
 
 ---
 
+===
+
 选择"导出整列"选项<br>
 填写需要导出的列数以及每一列的名称,例如:<br><br>
 !["demo"](https://github.com/wyh369352887/pickExcel/raw/master/image/2.jpg)

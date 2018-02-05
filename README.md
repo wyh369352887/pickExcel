@@ -11,7 +11,7 @@
 + 抓取整行数据
 + 抓取**符合某些条件**的整行数据
 <br>
-<br>
+<br> -->
 
 ### 使用方法
 拷贝项目至本地后，在浏览器内打开index.html
@@ -30,7 +30,7 @@ _sheet1,sheet2,sheet3..._
 <br>
 #### 抓取整列数据
 选择"导出整列"选项<br>
-填写需要导出的列数以及每一列的名称,例如:<br><br> -->
+填写需要导出的列数以及每一列的名称,例如:<br><br>
 !["demo"](https://github.com/wyh369352887/pickExcel/raw/master/image/2.jpg)
 <br><br>
 将xlxs文件拖进虚线框内<br><br>

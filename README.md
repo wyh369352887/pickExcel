@@ -61,6 +61,7 @@ pickExcel
 ![demo](https://github.com/wyh369352887/pickExcel/raw/master/image/4.jpg)
 <br>
 <br>
+将xlxs文件拖进虚线框内<br><br>
 
 #### 抓取符合条件的整行
 
@@ -72,5 +73,6 @@ pickExcel
 ![demo](https://github.com/wyh369352887/pickExcel/raw/master/image/5.jpg)
 <br>
 <br>
+将xlxs文件拖进虚线框内<br><br>
 
 这个项目只是个初版，是在工作之余根据以往的惨痛教训编写的，为了加快工作效率，暂时只支持这三个功能，后面陆续会增加，比如符合条件的行的其他值？抓取不连续的行的数据等等，个人感觉有些功能实现可能并没有什么实际意义...  <br>样式也会优化...

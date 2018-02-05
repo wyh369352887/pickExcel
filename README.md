@@ -36,7 +36,7 @@ _sheet1,sheet2,sheet3..._
 将xlxs文件拖进虚线框内<br><br>
 ![虚线框](https://github.com/wyh369352887/pickExcel/raw/master/image/1.jpg)
 <br><br>
---
+
 #### 抓取整行数据
 选择"导出整行"选项<br>
 填写excel数据起始的行数(_有些表格的会有总表头或者其他的内容会影响数据的读取_),填写抓取的起止行数,例如:
@@ -49,7 +49,7 @@ _sheet1,sheet2,sheet3..._
 ![demo](https://github.com/wyh369352887/pickExcel/raw/master/image/4.jpg)
 <br>
 <br>
---
+
 #### 抓取符合条件的整行
 选择"导出符合条件的整行",填写需要满足几个条件(注意，每个条件之间的关系是"且&&"),接着输入每个需要限制的条目和值,例如:
 <br>
@@ -57,5 +57,5 @@ _sheet1,sheet2,sheet3..._
 ![demo](https://github.com/wyh369352887/pickExcel/raw/master/image/5.jpg)
 <br>
 <br>
---
+
 这个项目只是个初版，是在工作之余根据以往的惨痛教训编写的，为了加快工作效率，暂时只支持这三个功能，后面陆续会增加，比如符合条件的行的其他值？抓取不连续的行的数据等等，个人感觉有些功能实现可能并没有什么实际意义...  <br>样式也会优化...

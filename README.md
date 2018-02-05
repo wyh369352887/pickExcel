@@ -29,7 +29,7 @@ pickExcel
 所有涉及到数字的地方请填写**阿拉伯数字**!<br>
 
 无论使用哪种功能，请先填写需要抓取Excel表格的页码,默认的命名方式为:<br>
-<code>sheet1,sheet2,sheet3 ...</code>
+<code>sheet1,sheet2,sheet3 ...</code><br>
 不排除有些表格自定义了命名，所以请提供页码名称,默认为:<br>
 <code>sheet1</code>
 <br>

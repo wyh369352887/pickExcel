@@ -178,6 +178,12 @@ function process_wb(wb) {
                 }
                 getLineByData(excelPage, lineData, output);
                 break;
+            case 'getHoleExcel':
+                if (out.innerHTML === undefined) out.textContent = resData;
+                else out.innerHTML = `<textarea id="text">${outputJson}</textarea>`;
+                if (typeof console !== 'undefined') console.log("output", new Date());
+                copyClick();
+                break;
             default:
                 alert('请先配置选项!');
                 break;
@@ -210,7 +216,7 @@ function copyClick() {
         $('p.title').html('输出:<span style="color:green;">已全选并复制到粘贴板!</span>');
     })
 }
-
+//点击全选
 function getLineByData(excelPage, lineData, output) {
     console.log(output);
     var resData = {};
@@ -340,6 +346,9 @@ function han() {
             var dataNum = document.getElementById('dataNum');
             dataNum.addEventListener('input', forDataLineInput, false);
             target = 'getLineByData';
+            break;
+        case 'holeExcel':
+            target = 'getHoleExcel';
             break;
         default:
             optionObj.innerHTML = '';

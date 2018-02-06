@@ -62,7 +62,7 @@ function s2ab(s) {
 
 function xw_noxfer(data, cb) {
     var worker = new Worker(XW.noxfer);
-    worker.onmessage = function(e) {
+    worker.onmessage = function (e) {
         switch (e.data.t) {
             case 'ready':
                 break;
@@ -80,7 +80,7 @@ function xw_noxfer(data, cb) {
 
 function xw_xfer(data, cb) {
     var worker = new Worker(rABS ? XW.rABS : XW.norABS);
-    worker.onmessage = function(e) {
+    worker.onmessage = function (e) {
         switch (e.data.t) {
             case 'ready':
                 break;
@@ -120,7 +120,7 @@ function get_radio_value(radioName) {
 //这个是必须的
 function to_json(workbook) {
     var result = {};
-    workbook.SheetNames.forEach(function(sheetName) {
+    workbook.SheetNames.forEach(function (sheetName) {
         var roa = X.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
         if (roa.length > 0) {
             result[sheetName] = roa;
@@ -204,9 +204,9 @@ function process_wb(wb) {
 }
 
 function copyClick() {
-    $('#text').on('click', function() {
+    $('#text').on('click', function () {
         $(this).select();
-        document.execCommand("Copy"); 
+        document.execCommand("Copy");
         $('p.title').html('输出:<span style="color:green;">已全选并复制到粘贴板!</span>');
     })
 }
@@ -287,7 +287,7 @@ function handleDrop(e) {
     var f = files[0]; {
         var reader = new FileReader();
         var name = f.name;
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             var data = e.target.result;
             var abcd = JSON.stringify(data);
             //console.log(abcd);
@@ -320,7 +320,7 @@ if (drop.addEventListener) {
     drop.addEventListener('dragover', handleDragover, false);
     drop.addEventListener('drop', handleDrop, false);
 }
-document.getElementById('select').addEventListener('change',han,false);
+document.getElementById('select').addEventListener('change', han, false);
 function han() {
     var id = $(this).find("option:selected").attr('id'),
         optionObj = document.getElementById('option');
@@ -362,7 +362,7 @@ function forDataLineInput() {
     var num = document.getElementById('dataNum').value,
         res = '';
     for (var i = 0; i < num; i++) {
-        var text = `<div class="line"></div><div style="float:left;margin-bottom:10px;"><p>需要满足条件的列的名称${i+1}:</p><input type="text" class="data-name"><p>需要满足条件的值${i+1}:</p><input type="text" class="data-msg"></div>`;
+        var text = `<div class="line"></div><div style="float:left;margin-bottom:10px;"><p>需要满足条件的列的名称${i + 1}:</p><input type="text" class="data-name"><p>需要满足条件的值${i + 1}:</p><input type="text" class="data-msg"></div>`;
         res += text;
     }
     document.getElementById('innerOption').innerHTML = res;
